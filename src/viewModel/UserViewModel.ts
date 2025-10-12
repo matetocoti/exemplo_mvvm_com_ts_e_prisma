@@ -1,5 +1,6 @@
 import prisma from "../database/prismaClient.js";
 import User from "../models/User.js";
+import { hashPassword } from "../middlewares/password/crypt.js";
 
 
 class UserViewModel {
@@ -8,7 +9,8 @@ class UserViewModel {
             data: {
                 name,
                 email,
-                password
+                // OBSERVAÇÃO: A senha deve ser criptografada antes de ser armazenada no banco de dados
+                password: hashPassword(password)
             },
             include: { tasks: true }
         });

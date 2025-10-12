@@ -9,7 +9,14 @@ authRouter.get('/login', (req: Request, res: Response) => {
   res.render('auth/login' , { title: 'Login' });
 });
 
-authRouter.post('/login', (req: Request, res: Response) => {
+
+authRouter.get('/register', (req: Request, res: Response) => {
+  res.render('auth/register' , { title: 'Register' });
+});
+
+
+
+authRouter.post('/register', (req: Request, res: Response) => {
   // Lógica de autenticação (exemplo simplificado)
   const { email, username, password } = req.body;
   UserViewModel.createUser(username ,password ,email).then(user => {
