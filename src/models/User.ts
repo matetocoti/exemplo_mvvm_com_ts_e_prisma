@@ -1,5 +1,5 @@
 import Task from "./Task.js";
-import { hashPassword , verifyPassword } from "../middlewares/password/crypt.js";
+import { verifyPassword } from "../middlewares/password/crypt.js";
 import { generateToken } from "../middlewares/password/auth.js";
 
 class User {
@@ -14,7 +14,7 @@ class User {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.password = hashPassword(password);
+        this.password = password; // Senha e hashada no momento no armazenamento|querry no banco de dados 
         this.tasks = [];
     }
 

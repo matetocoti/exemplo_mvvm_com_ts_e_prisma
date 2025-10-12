@@ -17,6 +17,16 @@ class UserViewModel {
         // Retorne apenas os dados públicos
         return new User(user.id, user.name, user.email, user.password).getPublicDate();
     }
+
+    static async logIn(email: string, password: string) {
+
+        const user = await prisma.user.findUnique({
+            where: { email }
+        });
+        const userModel = user ? new User(user.id, user.name, user.email, user.password) : null;
+        return userModel ? userModel.authenticate(email, password) : null;
+        // Retorne apenas os dados públicos
+    }  
 }
 
 export default UserViewModel;

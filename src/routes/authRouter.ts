@@ -14,6 +14,19 @@ authRouter.get('/register', (req: Request, res: Response) => {
   res.render('auth/register' , { title: 'Register' });
 });
 
+authRouter.post('/login', (req: Request, res: Response) => {
+  // Lógica de autenticação (exemplo simplificado)
+  const { email, password } = req.body;
+  UserViewModel.logIn(email ,password).then(token => {
+      if(token) {
+          res.json({ message: 'Login successful', token });
+      } else {
+          res.status(401).json({ message: 'Invalid credentials' });
+      }
+  }).catch(err => {
+      res.status(500).json({ message: 'Error during login', error: err.message });
+  });
+});
 
 
 authRouter.post('/register', (req: Request, res: Response) => {
